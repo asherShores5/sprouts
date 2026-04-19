@@ -2,9 +2,9 @@
 
 A two-player browser implementation of [Sprouts](https://en.wikipedia.org/wiki/Sprouts_(game)) — the classic pencil-and-paper topology game invented by John Conway and Michael Paterson in 1967.
 
-**[Play it live →](https://sprouts.yourdomain.com)**
+**[Play it live →]((https://main.d37ybsoeyysuqo.amplifyapp.com/))**
 
-![Sprouts game screenshot](screenshot.png)
+![Sprouts game screenshot](sprouts.png)
 
 ---
 
