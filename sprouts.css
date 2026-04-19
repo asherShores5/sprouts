@@ -1,0 +1,355 @@
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0d1b2a;
+  color: #e8edf2;
+}
+
+/* ── App shell ── */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* ── Status bar ── */
+#statusBar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #112240;
+  border-bottom: 1px solid #1e3a5f;
+  min-height: 48px;
+  z-index: 10;
+}
+
+#statusBar.hidden {
+  display: none;
+}
+
+#turnLabel {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#statusControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#moveCounter {
+  font-size: 0.8rem;
+  color: #4a7fa5;
+  margin-right: 4px;
+}
+
+.bar-btn {
+  padding: 6px 12px;
+  border: 1px solid #4a7fa5;
+  border-radius: 6px;
+  background: transparent;
+  color: #7eb8d4;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.bar-btn:hover {
+  background: #1e3a5f;
+  color: #a8d4e8;
+}
+
+.bar-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ── Canvas container ── */
+#canvasContainer {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+  background: #0d1b2a;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ── UI overlay layer ── */
+#ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#ui > * {
+  pointer-events: auto;
+}
+
+/* ── Start screen ── */
+#startScreen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 27, 42, 0.97);
+}
+
+#startScreen.hidden {
+  display: none;
+}
+
+.start-card {
+  background: #112240;
+  border: 1px solid #1e3a5f;
+  border-radius: 12px;
+  padding: 36px 40px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+}
+
+.start-card h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #a8d4e8;
+}
+
+.start-card p {
+  color: #7eb8d4;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-row label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #a8d4e8;
+}
+
+#spotCountInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #1e3a5f;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: center;
+  background: #0d1b2a;
+  color: #e8edf2;
+}
+
+#spotCountInput:focus {
+  outline: 2px solid #4a7fa5;
+  border-color: transparent;
+}
+
+#startError {
+  color: #f87171;
+  font-size: 0.8rem;
+  min-height: 1.2em;
+  margin-bottom: 8px;
+}
+
+#startBtn {
+  width: 100%;
+  padding: 10px;
+  background: #1e3a5f;
+  color: #a8d4e8;
+  border: 1px solid #4a7fa5;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#startBtn:hover {
+  background: #2a4f7a;
+  color: #e8edf2;
+}
+
+/* ── Game-over overlay ── */
+#gameOverOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 27, 42, 0.95);
+}
+
+#gameOverOverlay.hidden {
+  display: none;
+}
+
+.gameover-card {
+  background: #112240;
+  border: 1px solid #1e3a5f;
+  border-radius: 12px;
+  padding: 36px 40px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+}
+
+.gameover-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #a8d4e8;
+}
+
+#winnerText {
+  font-size: 1.1rem;
+  color: #7eb8d4;
+  margin-bottom: 24px;
+}
+
+#newGameOverBtn {
+  padding: 10px 28px;
+  background: #1e3a5f;
+  color: #a8d4e8;
+  border: 1px solid #4a7fa5;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#newGameOverBtn:hover {
+  background: #2a4f7a;
+  color: #e8edf2;
+}
+
+/* ── Toast container ── */
+#toastContainer {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.toast {
+  background: rgba(17, 34, 64, 0.95);
+  color: #a8d4e8;
+  border: 1px solid #1e3a5f;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.toast.fade-out {
+  opacity: 0;
+}
+
+/* ── Rules modal ── */
+#rulesModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 27, 42, 0.88);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+#rulesModal.open {
+  display: flex;
+}
+
+.rules-card {
+  background: #112240;
+  border: 1px solid #1e3a5f;
+  border-radius: 12px;
+  padding: 32px 36px;
+  max-width: 420px;
+  width: 92%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.6);
+}
+
+.rules-card h2 {
+  font-size: 1.3rem;
+  color: #a8d4e8;
+  margin-bottom: 16px;
+}
+
+.rules-card ol {
+  padding-left: 1.4em;
+  color: #7eb8d4;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.rules-card li {
+  margin-bottom: 6px;
+}
+
+.rules-card .rules-tip {
+  font-size: 0.8rem;
+  color: #4a7fa5;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+#closeRulesBtn {
+  width: 100%;
+  padding: 9px;
+  background: #1e3a5f;
+  color: #a8d4e8;
+  border: 1px solid #4a7fa5;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+#closeRulesBtn:hover {
+  background: #2a4f7a;
+  color: #e8edf2;
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 480px) {
+  .start-card, .gameover-card {
+    padding: 24px 20px;
+  }
+
+  .start-card h1 {
+    font-size: 1.6rem;
+  }
+}

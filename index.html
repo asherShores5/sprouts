@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sprouts — Two-Player Strategy Game</title>
+  <meta name="description" content="A two-player browser game of Sprouts — the classic pencil-and-paper topology game invented by John Conway. Draw curves between spots, place new spots, and make the last valid move to win." />
+  <meta property="og:title" content="Sprouts" />
+  <meta property="og:description" content="Play Sprouts in your browser — a two-player strategy game of curves and spots." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <link rel="stylesheet" href="sprouts.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Status bar (shown during gameplay) -->
+    <div id="statusBar" class="hidden">
+      <span id="turnLabel">Player 1's turn</span>
+      <div id="statusControls">
+        <span id="moveCounter">Move 0</span>
+        <button id="undoBtn" class="bar-btn" type="button" disabled title="Undo last move (U)">↩ Undo</button>
+        <button id="rulesBtn" class="bar-btn" type="button" title="How to play (?)">? Rules</button>
+        <button id="newGameBtn" class="bar-btn" type="button" title="New game (N)">New Game</button>
+      </div>
+    </div>
+
+    <!-- Canvas container -->
+    <div id="canvasContainer">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- UI overlay -->
+      <div id="ui">
+
+        <!-- Start screen -->
+        <div id="startScreen">
+          <div class="start-card">
+            <h1>Sprouts</h1>
+            <p>Take turns drawing curves between spots. A new spot appears on each curve. The player who makes the last valid move wins.</p>
+            <form id="startForm">
+              <div class="form-row">
+                <label for="spotCountInput">Number of starting spots (2–8)</label>
+                <input
+                  id="spotCountInput"
+                  type="number"
+                  min="2"
+                  max="8"
+                  value="3"
+                  inputmode="numeric"
+                  autocomplete="off"
+                />
+              </div>
+              <div id="startError" role="alert" aria-live="polite"></div>
+              <button id="startBtn" type="submit">Start Game</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Game-over overlay -->
+        <div id="gameOverOverlay" class="hidden">
+          <div class="gameover-card">
+            <h2>Game Over</h2>
+            <p id="winnerText">Player 1 wins!</p>
+            <button id="newGameOverBtn" type="button">New Game</button>
+          </div>
+        </div>
+
+        <!-- Toast container -->
+        <div id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+      </div><!-- /#ui -->
+    </div><!-- /#canvasContainer -->
+  </div><!-- /#app -->
+
+  <!-- Rules modal -->
+  <div id="rulesModal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="rules-card">
+      <h2 id="rulesTitle">How to Play Sprouts</h2>
+      <ol>
+        <li>Players take turns drawing a curve between any two live spots (or from a spot back to itself).</li>
+        <li>The curve must not cross any existing curve or pass through any existing spot.</li>
+        <li>After drawing, a new spot is placed at the midpoint of the curve.</li>
+        <li>Each spot can have at most <strong>3 connections</strong>. A spot with 3 connections is dead and cannot be used.</li>
+        <li>The player who makes the <strong>last valid move wins</strong>.</li>
+      </ol>
+      <p class="rules-tip">💡 A spot used as both endpoints of a loop counts as 2 connections. The new midpoint spot starts with 2 connections.</p>
+      <button id="closeRulesBtn" type="button">Got it</button>
+    </div>
+  </div>
+
+  <script src="sprouts.js"></script>
+</body>
+</html>

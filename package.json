@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "test": "node --test sprouts.test.js"
+  },
+  "dependencies": {
+    "fast-check": "3.22.0"
+  }
+}

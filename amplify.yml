@@ -1,0 +1,14 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - echo "No build step required — static files"
+  artifacts:
+    baseDirectory: .
+    files:
+      - index.html
+      - sprouts.css
+      - sprouts.js
+  cache:
+    paths: []
